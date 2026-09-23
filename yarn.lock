@@ -426,6 +426,16 @@
     "@deepseek-ai/dsh-util-values" "^0.1.5-rc.3"
     "@deepseek-ai/schemastery" "3.18.2"
 
+"@deepseek-ai/dsh-agent-loop@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-agent-loop/-/dsh-agent-loop-0.1.5-rc.2.tgz#31e8d3daaf6d591f94e9d4e44ffd8efe150837dc"
+  integrity sha512-24wvqVlqFmdqJ2Bhcku/vKeNy+qWSmeEeN7lvcUB+WkhcF0/Ra2G3WwcVmnahJA4+w0AKdW3W7v+YYcO/jKJpg==
+  dependencies:
+    "@deepseek-ai/dsh-brand" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-util-values" "^0.1.5-rc.2"
+    "@deepseek-ai/schemastery" "^3.18.2"
+    zod "^4.4.3"
+
 "@deepseek-ai/dsh-agent-loop@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-agent-loop/-/dsh-agent-loop-0.1.5-rc.3.tgz#5b929d19b6fcd48de2d0021de82574360b2bf866"
@@ -481,6 +491,17 @@
     "@deepseek-ai/dsh-deque" "^0.1.5-rc.3"
     "@deepseek-ai/dsh-session" "^0.1.5-rc.3"
     "@deepseek-ai/dsh-util-values" "^0.1.5-rc.3"
+
+"@deepseek-ai/dsh-api-session-controller@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-api-session-controller/-/dsh-api-session-controller-0.1.5-rc.2.tgz#797e569c0a32ef2567afce02516fd5d61d97d866"
+  integrity sha512-rwOxS6piZ9EuLgE/pbq4cUlRCGv98IKgdFnK5v8WNwZYKug3rUpvYODDU9vE42ydmClgjFd/KIAaEDFPatcDpA==
+  dependencies:
+    "@deepseek-ai/dsh-brand" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-deque" "^0.1.5-rc.2"
+    "@deepseek-ai/schemastery" "^3.18.2"
+    mime-types "^3.0.2"
+    zod "^4.4.3"
 
 "@deepseek-ai/dsh-api-session-controller@^0.1.5-rc.3":
   version "0.1.5-rc.3"
@@ -539,6 +560,14 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-atomic-write/-/dsh-atomic-write-0.1.5-rc.3.tgz#d5efa8b9fddb8e4699a86c57f1f688da6b05a8b0"
   integrity sha512-CcBBDXpNsIBTu5yxunuG+9YJLLfzq4EDiyKattd62WHAJczsnl0cFmaEfo3HiIXRYzhcHHVpqErCbvq6Lyc0kw==
 
+"@deepseek-ai/dsh-attachment-local@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-attachment-local/-/dsh-attachment-local-0.1.5-rc.2.tgz#e4a64e0fc5999b80967516177bb7f898a51f3ddc"
+  integrity sha512-UN9Zw6oBqHl/SQxFQCGUp8OcARQkPzZo4BGNkSQHqSsEo3d59Mv7H5mSFHmKl4NogSMwksjN3SF0FocN7xyF2A==
+  dependencies:
+    "@deepseek-ai/schemastery" "^3.18.2"
+    sharp "^0.35.3"
+
 "@deepseek-ai/dsh-attachment-local@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-attachment-local/-/dsh-attachment-local-0.1.5-rc.3.tgz#058720e632286e037ee45d6e7f52023716a0ab87"
@@ -546,6 +575,11 @@
   dependencies:
     "@deepseek-ai/schemastery" "3.18.2"
     sharp "^0.35.3"
+
+"@deepseek-ai/dsh-attachment@^0.1.5-rc.2":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-attachment/-/dsh-attachment-0.1.5-rc.3.tgz#4c991cbb4c83ffe6279228b9a0ca2e405c05d009"
+  integrity sha512-mQpRILttCP9rxUro5N78jSd7dKLb1tsQN9Qf+talhhxfsOigUCyWqsWVrLJIdXV4Bpa3ZzNuQK29O8D7Z+Njvg==
 
 "@deepseek-ai/dsh-base@^0.1.5-rc.2":
   version "0.1.5-rc.3"
@@ -654,7 +688,7 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-brand/-/dsh-brand-0.1.5-rc.3.tgz#21b9904ebcf06edb59f51938959a33dd39775b6a"
   integrity sha512-pzbPtyEwnFMCrUYLwFio8GmUxtTqqAkhW5IheWH1tSgUnVIAu4OwVbxwTNiDGMRbgTRAzT9xZ7bukUejpyob4w==
 
-"@deepseek-ai/dsh-chunked-list@^0.1.5-rc.3":
+"@deepseek-ai/dsh-chunked-list@^0.1.5-rc.2", "@deepseek-ai/dsh-chunked-list@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-chunked-list/-/dsh-chunked-list-0.1.5-rc.3.tgz#e46395bd365d31ac18ffdb837d3ba046d836a8b7"
   integrity sha512-zeKMMzqmzn6cV1EzqWhDrUl6Ud/4o49Qf/UTAyTbnKWindKEfVHSt5K2rDIdjHvKEOb016w5K+Cx1EOp3OQN1Q==
@@ -953,6 +987,14 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-command-goal/-/dsh-command-goal-0.1.5-rc.3.tgz#c951826c0ce66546f31211a69343cab1bd9edd92"
   integrity sha512-aV4j2Two25BqyLxx5hFEa+EF3cw9eDOcbFjpdjtb/v1PniR4AQa5lcdrNMajD2dbARIJO6ya423VTKYhvsPKOA==
 
+"@deepseek-ai/dsh-commands@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-commands/-/dsh-commands-0.1.5-rc.2.tgz#ce77c0ffeecb6ff6b07a75fa925aed5a9a93678c"
+  integrity sha512-ODc9h2Jig+Lo4XLdxqHpHjSXsBFeUCth6Y/rToor4KVRWQMedUARlq5otPyB1lYHyQh2DonNs2uf7g3mvag57A==
+  dependencies:
+    "@deepseek-ai/dsh-util-crypto" "^0.1.5-rc.2"
+    zod "^4.4.3"
+
 "@deepseek-ai/dsh-commands@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-commands/-/dsh-commands-0.1.5-rc.3.tgz#2f4ee78d740816f75e417b5cafb4cb3d272e8ebc"
@@ -1017,7 +1059,7 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-deepseek-llm-api-extensions/-/dsh-deepseek-llm-api-extensions-0.1.5-rc.3.tgz#fc322de3ba81986c9e097352e9a296f94b522024"
   integrity sha512-EAYazP+BCUxxv+YNE9J2qwDEFjQ8tRwwGEvuq6gEqSw49l0pNYX/10phoi/Z+af402qrOz5zEXYs9xwR5YmLSA==
 
-"@deepseek-ai/dsh-deque@^0.1.5-rc.3":
+"@deepseek-ai/dsh-deque@^0.1.5-rc.2", "@deepseek-ai/dsh-deque@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-deque/-/dsh-deque-0.1.5-rc.3.tgz#1d0b26265642b528631bfdfbd1310e34ea2e518a"
   integrity sha512-Q6mGABSjXewkPPrvKQLD9G2vfWBK4QACyynIDB7fiyVAP9JYdSr40PL/k5DVNi7CwRqYT5moeYCGiENiLHv09w==
@@ -1184,6 +1226,13 @@
   dependencies:
     "@deepseek-ai/schemastery" "3.18.2"
 
+"@deepseek-ai/dsh-jobs-local@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-jobs-local/-/dsh-jobs-local-0.1.5-rc.2.tgz#7c7f1b7b1bd6d7ecec4772984bf3ef5bd062af47"
+  integrity sha512-PCDLSktONJ+If3QCcPlRskVLXIa8hG/l0pBIgKNllz4mb7CmYlJ5w1H9pWyrFZllMO0Wm94ZS9aP3SnUcJ8R1g==
+  dependencies:
+    "@deepseek-ai/schemastery" "^3.18.2"
+
 "@deepseek-ai/dsh-jobs-local@^0.1.5-rc.2", "@deepseek-ai/dsh-jobs-local@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-jobs-local/-/dsh-jobs-local-0.1.5-rc.3.tgz#1c1ffd4fab5c2cd625c98f81cdae6be0e0a8f6ea"
@@ -1191,10 +1240,25 @@
   dependencies:
     "@deepseek-ai/schemastery" "3.18.2"
 
+"@deepseek-ai/dsh-jobs@^0.1.5-rc.2":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-jobs/-/dsh-jobs-0.1.5-rc.3.tgz#3c9308e27f9bc8d0622c01df7d01174204b3f8ce"
+  integrity sha512-L7iOJndKOxikU6vzwFO31yLxKejsqW60B5ny1rurqA8a46E6eAyRZPwBMVjziIfaBq6XIH9tuSq0/eQD59Xt5w==
+
 "@deepseek-ai/dsh-launch-environment@^0.1.5-rc.2", "@deepseek-ai/dsh-launch-environment@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-launch-environment/-/dsh-launch-environment-0.1.5-rc.3.tgz#788ef2d0699ff6d8c3f53a94a7dabdec9a0585c5"
   integrity sha512-m2Y4wiLv3av81pBCUHCg5pQe8Xj4+JdPP2njTEZb0I5Tyh7wcDeNbRKiFPVVHgob0qO2+0H2LnXnm733NNT3ig==
+
+"@deepseek-ai/dsh-llm-deepseek@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-llm-deepseek/-/dsh-llm-deepseek-0.1.5-rc.2.tgz#0abd520c7e772cbe3ac127275bf42e7ed986aabd"
+  integrity sha512-qNRbLsE2ro+AfD7NgJwTukQLG82gIkbAISjDHgv0au7TocfPkNkUWSu20mTaBcuLGXzfSgBVn4oYx5N3ws6KVg==
+  dependencies:
+    "@deepseek-ai/dsh-brand" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-util-values" "^0.1.5-rc.2"
+    "@deepseek-ai/schemastery" "^3.18.2"
+    eventsource-parser "^3.1.0"
 
 "@deepseek-ai/dsh-llm-deepseek@^0.1.5-rc.3":
   version "0.1.5-rc.3"
@@ -1224,7 +1288,7 @@
     "@deepseek-ai/schemastery" "3.18.2"
     zod "^4.4.3"
 
-"@deepseek-ai/dsh-llm@^0.1.5-rc.3":
+"@deepseek-ai/dsh-llm@^0.1.5-rc.2", "@deepseek-ai/dsh-llm@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-llm/-/dsh-llm-0.1.5-rc.3.tgz#c63b6415415ec922f62a4bc908a7db3e24a16331"
   integrity sha512-c6Z7S1SlRAgLKQ/MZKp0mCMrBz06X9XEddLFxhK5Flq0PM18dsJgIbRgNpobILy2AJyYx0vnHbepjmITW6BXWA==
@@ -1424,7 +1488,7 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-checkpoint-policy/-/dsh-session-checkpoint-policy-0.1.5-rc.3.tgz#3b34e85f04d4cb0368cc0b257de4dc4934a28893"
   integrity sha512-5aoJeLWoaA3Mj6jf0eBOeMlBsK3ESzyeRjyjCusBMvsmF+JWXv95sJ02IZMCq8/feZbv2pxx3c6CH09MHZhQyQ==
 
-"@deepseek-ai/dsh-session-format-catalog@^0.1.5-rc.3":
+"@deepseek-ai/dsh-session-format-catalog@^0.1.5-rc.2", "@deepseek-ai/dsh-session-format-catalog@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-format-catalog/-/dsh-session-format-catalog-0.1.5-rc.3.tgz#3d71d2841217f4f6cb602f3c496f7619bfc18495"
   integrity sha512-R9ilR/0LKeIhShJxWMxtut1Um1Tb4r0JxR9Ay757Z4jL6yjk9mR1H3mBlZq6gf2U/bTkm2EW55WVJ+sdTC6row==
@@ -1452,7 +1516,7 @@
     "@deepseek-ai/dsh-session-format-v0-to-v1" "^0.1.5-rc.3"
     "@deepseek-ai/dsh-util-values" "^0.1.5-rc.3"
 
-"@deepseek-ai/dsh-session-format-v2-to-v3@^0.1.5-rc.3":
+"@deepseek-ai/dsh-session-format-v2-to-v3@^0.1.5-rc.2", "@deepseek-ai/dsh-session-format-v2-to-v3@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-format-v2-to-v3/-/dsh-session-format-v2-to-v3-0.1.5-rc.3.tgz#98aceac1cafd7950a195d578871cab1163b74494"
   integrity sha512-pcssXAfx1QdxqNcD/h/xByN4lWbnqHVOpM9Zq7i9Gyhgtt9+EdPw6DZ639psx6idCvU5Hv1aYytm+N8Kk970MQ==
@@ -1461,7 +1525,7 @@
     "@deepseek-ai/dsh-session-format-v0-to-v1" "^0.1.5-rc.3"
     "@deepseek-ai/dsh-session-format-v1-to-v2" "^0.1.5-rc.3"
 
-"@deepseek-ai/dsh-session-format@^0.1.5-rc.3":
+"@deepseek-ai/dsh-session-format@^0.1.5-rc.2", "@deepseek-ai/dsh-session-format@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-format/-/dsh-session-format-0.1.5-rc.3.tgz#7adc408e450040940854fa5aae94d4d219b60c30"
   integrity sha512-5oFAlCCmO4CLLH/3DUxhLzJ+oMSC/MxKm0df0vzYo5AmrPLpBnqPZADp6snaiGZJl02JVUvo/gTPdG70NkV69Q==
@@ -1477,6 +1541,16 @@
     "@deepseek-ai/dsh-util-values" "^0.1.5-rc.3"
     "@deepseek-ai/schemastery" "3.18.2"
 
+"@deepseek-ai/dsh-session-log-export@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-log-export/-/dsh-session-log-export-0.1.5-rc.2.tgz#4071224acfb5adcb0b6939ffd49cedfe2bf2e047"
+  integrity sha512-eoJWiv/oZQA2S61PpDpkU6kovoN5rQ1ZvOmp3HfKLKqfWzi6La1YP5VyiXi/g0qFjZ3ttZC0N+ckmWjNcGUjzw==
+  dependencies:
+    "@deepseek-ai/dsh-brand" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-session-format" "^0.1.5-rc.2"
+    "@deepseek-ai/schemastery" "^3.18.2"
+    fflate "^0.8.2"
+
 "@deepseek-ai/dsh-session-log-export@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-log-export/-/dsh-session-log-export-0.1.5-rc.3.tgz#e386e02f9b666a57b7d11885082d883beeac6674"
@@ -1486,6 +1560,19 @@
     "@deepseek-ai/dsh-session-format" "^0.1.5-rc.3"
     "@deepseek-ai/schemastery" "3.18.2"
     fflate "^0.8.2"
+
+"@deepseek-ai/dsh-session-persistence-jsonl@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-persistence-jsonl/-/dsh-session-persistence-jsonl-0.1.5-rc.2.tgz#fe958e4830463809c40d57c0acd2050134e111b6"
+  integrity sha512-nkIXdb5oOV6a05Of+3Wywe3gEB77uQOH1U0M+/SRVziSLX4JkE+us7dbWczOOloZjuUsEV7Il8kZ3R9JLsGqjA==
+  dependencies:
+    "@deepseek-ai/dsh-llm" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-session-format" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-session-format-catalog" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-session-format-v2-to-v3" "^0.1.5-rc.2"
+    "@deepseek-ai/node-addon-system" "^0.1.2"
+    "@deepseek-ai/schemastery" "^3.18.2"
+    koffi "^3.1.0"
 
 "@deepseek-ai/dsh-session-persistence-jsonl@^0.1.5-rc.3":
   version "0.1.5-rc.3"
@@ -1499,6 +1586,13 @@
     "@deepseek-ai/node-addon-system" "^0.1.2"
     "@deepseek-ai/schemastery" "3.18.2"
     koffi "^3.1.0"
+
+"@deepseek-ai/dsh-session-persistence@^0.1.5-rc.2":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-persistence/-/dsh-session-persistence-0.1.5-rc.3.tgz#8d095d968cdf3439a04b42c49eb41f11eba471ef"
+  integrity sha512-USxl2JIZdcVeJLFy6fdkMXgSRDZ2fkagvVqH6ft7h08TzWjxPhi8IssJyJZ0z49lVizA8MXYySzPjwkg1/uHVQ==
+  dependencies:
+    "@deepseek-ai/dsh-util-values" "^0.1.5-rc.3"
 
 "@deepseek-ai/dsh-session-projection-cache@^0.1.5-rc.3":
   version "0.1.5-rc.3"
@@ -1516,12 +1610,24 @@
   dependencies:
     zod "^4.4.3"
 
+"@deepseek-ai/dsh-session-query-sqlite@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-query-sqlite/-/dsh-session-query-sqlite-0.1.5-rc.2.tgz#e0e91bb17c5cb6f61764d95270498cc9251523e6"
+  integrity sha512-7xqyRvcaXfPzK6T96QFTdfEVbYIOz69qcghBoDMwSo66MQ+3DSdH3yTPlvrf3a8Nd9Jek375Upz1h12//FB5Ew==
+  dependencies:
+    "@deepseek-ai/schemastery" "^3.18.2"
+
 "@deepseek-ai/dsh-session-query-sqlite@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-query-sqlite/-/dsh-session-query-sqlite-0.1.5-rc.3.tgz#cded0e84e822e57523e27ebc26e4648c70075433"
   integrity sha512-ZjErqMh+qasqV++lq3ZJ1TtZBCOvJ9Eq289zMqb7gj3CET50vPqPODPzTs1LfPOUDs0SfzSWHjr+deh6d1oyIg==
   dependencies:
     "@deepseek-ai/schemastery" "3.18.2"
+
+"@deepseek-ai/dsh-session-query@^0.1.5-rc.2":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-session-query/-/dsh-session-query-0.1.5-rc.3.tgz#dbd8073ae746a42603c18bac8e4e7dc6178dac7d"
+  integrity sha512-xQhy5L/4ZqLBD3qywIQM9xSvO4+SkhcJPM5Q6aYX6c9UklpYpwqEMMmgpXGnGxeteQ6FME991ohoWpMICC1PFQ==
 
 "@deepseek-ai/dsh-session-reference@^0.1.5-rc.2", "@deepseek-ai/dsh-session-reference@^0.1.5-rc.3":
   version "0.1.5-rc.3"
@@ -1598,6 +1704,16 @@
     "@deepseek-ai/dsh-llm" "^0.1.5-rc.3"
     "@deepseek-ai/dsh-util-values" "^0.1.5-rc.3"
 
+"@deepseek-ai/dsh-settings-file@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-settings-file/-/dsh-settings-file-0.1.5-rc.2.tgz#cd5dea3b7724f912b4fa11f8a35ce79672301bb9"
+  integrity sha512-5bdcCyDLMQyo4sm1g8l4mNjIrsyfn1mu3+9tvGYrDWIw0f1n1YEIWuHp2reyoZpRCMAco9S5N4mDoKF2mc9T/Q==
+  dependencies:
+    "@deepseek-ai/dsh-util-values" "^0.1.5-rc.2"
+    "@deepseek-ai/schemastery" "^3.18.2"
+    chokidar "^4.0.3"
+    yaml "^2.9.0"
+
 "@deepseek-ai/dsh-settings-file@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-settings-file/-/dsh-settings-file-0.1.5-rc.3.tgz#0922a879fc74409f956a9d5dbb51896d9925de8d"
@@ -1607,6 +1723,13 @@
     "@deepseek-ai/schemastery" "3.18.2"
     chokidar "^4.0.3"
     yaml "^2.9.0"
+
+"@deepseek-ai/dsh-settings@^0.1.5-rc.2":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-settings/-/dsh-settings-0.1.5-rc.3.tgz#ecfa6584d2afd39e35842afe71ab8fabeb19d9f9"
+  integrity sha512-I7jfjxOfoScZWKD08TQkoiS1uPLKwHZ3OXyMPcJC98EobRCitS5Hynp/cNdymxesALp/jSGzfaNCnrQGx8iirg==
+  dependencies:
+    "@deepseek-ai/dsh-util-values" "^0.1.5-rc.3"
 
 "@deepseek-ai/dsh-shell-env@^0.1.5-rc.3":
   version "0.1.5-rc.3"
@@ -1681,6 +1804,13 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-storage/-/dsh-storage-0.1.5-rc.3.tgz#e33e5827dd811c5847f1b23220216a94e0b78c30"
   integrity sha512-qz3xDTczBHv5DRfMJhzrA0vC7YtSbkIZbph3xmzOoPB/pNir0O+FJex3j/NXORS9tUtI92PPcf2t6Jt7WIEjGA==
 
+"@deepseek-ai/dsh-subagent-fork-in-process@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-subagent-fork-in-process/-/dsh-subagent-fork-in-process-0.1.5-rc.2.tgz#92862c3c67ccfb103d8025647fa0fbbdd2c1a6a7"
+  integrity sha512-9VHI9pA1FX7mEOUx8Iw7Q6Sqk76rJGsOCQ0jwsaE+7YvQxV8YhOFe9gBzkmk+ChRNag5ToBVLFuUFROpboo+Xw==
+  dependencies:
+    "@deepseek-ai/schemastery" "^3.18.2"
+
 "@deepseek-ai/dsh-subagent-fork-in-process@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-subagent-fork-in-process/-/dsh-subagent-fork-in-process-0.1.5-rc.3.tgz#e01a81cc4428880af8db8ad894c3fce33b5d9161"
@@ -1695,12 +1825,29 @@
   dependencies:
     "@deepseek-ai/dsh-brand" "^0.1.5-rc.2"
 
+"@deepseek-ai/dsh-subagent-spawn-in-process@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-subagent-spawn-in-process/-/dsh-subagent-spawn-in-process-0.1.5-rc.2.tgz#3cad70097b923a7eec98f534709072781f5592e0"
+  integrity sha512-/FJxY+dBc8AVWFmSYcQPWapuTd3ATGQpAb9Z2cQEZjFRXy8ySuZnh2MrnAa/r00FX6Lz0G8BfvUurr4K+uKHSw==
+  dependencies:
+    "@deepseek-ai/schemastery" "^3.18.2"
+
 "@deepseek-ai/dsh-subagent-spawn-in-process@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-subagent-spawn-in-process/-/dsh-subagent-spawn-in-process-0.1.5-rc.3.tgz#e0eca747ed5e4b6692520f153dfe306aecff4298"
   integrity sha512-VaSV1S0S4qdAQf7nW7GPofVt6l+bafnwPgmtSr3bK6LxJAVI9xtCL7ipuVCYMM0p+P2RYlNAyPMBubI3FGs+ag==
   dependencies:
     "@deepseek-ai/schemastery" "3.18.2"
+
+"@deepseek-ai/dsh-subagent@0.1.5-rc.2":
+  version "0.1.5-rc.2"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-subagent/-/dsh-subagent-0.1.5-rc.2.tgz#3db3f4d47c8ee2cb38f6ad84daeb7a750b36911a"
+  integrity sha512-f2wbfB1M2P8RpcApp5eDpDQR4V5ElvEkeK6su7tor1U06uJadJ+JuIVXP3MrCnT7yjg/IM2tTacYFMOg62BOfg==
+  dependencies:
+    "@deepseek-ai/dsh-brand" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-chunked-list" "^0.1.5-rc.2"
+    "@deepseek-ai/dsh-util-values" "^0.1.5-rc.2"
+    zod "^4.4.3"
 
 "@deepseek-ai/dsh-subagent@^0.1.5-rc.3":
   version "0.1.5-rc.3"
@@ -1970,15 +2117,25 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-user-questions/-/dsh-user-questions-0.1.5-rc.3.tgz#2d170dabedba26eb0d61561c69953fde6f5bd2cb"
   integrity sha512-wrItLibbCIYDVoCjHbz+uJAmmWENTZ58H/bg6a8DveygBK6Oi3dYVguw8epo3cePdXdjlCZPt1qi4DGAot3fiA==
 
-"@deepseek-ai/dsh-util-crypto@^0.1.5-rc.3":
+"@deepseek-ai/dsh-util-crypto@^0.1.5-rc.2", "@deepseek-ai/dsh-util-crypto@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-util-crypto/-/dsh-util-crypto-0.1.5-rc.3.tgz#1fde9777e2d7486e71b3fd0044ae11237c6de74a"
   integrity sha512-gQAFF2TLLAV5ejHAklCplePVdL2TV4CH1Xt3A0bqaLxZ2zoOxXoVUieUzPrHo+X1NKfsmdcWvOx9zdlDkXY+sQ==
+
+"@deepseek-ai/dsh-util-time@^0.1.5-rc.2":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-util-time/-/dsh-util-time-0.1.5-rc.3.tgz#4bedde26c464261fbf5ecb444c0b2b2fb5b8dcbb"
+  integrity sha512-q/SeDBaIPOw+FNCZ+sYAghYNtzqc6vNSvGg/RxFK8pkTayZh7yGZs6QhGkvVxkqJOiLWkgW2rrZ6ayqTMyJxcg==
 
 "@deepseek-ai/dsh-util-values@^0.1.5-rc.2", "@deepseek-ai/dsh-util-values@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-util-values/-/dsh-util-values-0.1.5-rc.3.tgz#3d5ab57669d8dccbd2fe252a6a27f04e998fe198"
   integrity sha512-K0qEm9XmgcxCMuJBK7skNE3v35JTOurN24IwrZ4t0xoaSlZSF4wR0L/R7ipj9IQSlB7sGdQLdegTNsZmSlmw4Q==
+
+"@deepseek-ai/dsh-util-workspace-path@^0.1.5-rc.2":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-util-workspace-path/-/dsh-util-workspace-path-0.1.5-rc.3.tgz#55ee03055876578a8d36670c610ff95ca4a78c86"
+  integrity sha512-lxDZfkUzHB9XwBsGUxEoUmaS/Kk4DcfjFS064bqb9QvfqLMwZSRoJ7r1ylhe8piwkexW/ZM8Z97ueI93cPvYaA==
 
 "@deepseek-ai/dsh-web-app@^0.1.5-rc.2":
   version "0.1.5-rc.3"

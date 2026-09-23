@@ -17,7 +17,7 @@
     "test:packaged": "node scripts/verify-packaged-app.mjs",
     "pack:mac": "electron-builder --mac dir --arm64",
     "dist:mac": "electron-builder --mac dmg --arm64 --publish never",
-    "postinstall": "npm run build:icon && electron-builder install-app-deps"
+    "postinstall": "node scripts/patch-dsh-runtime.mjs && npm run build:icon && electron-builder install-app-deps"
   },
   "dependencies": {
     "@deepseek-ai/cordis-plugin-group": "1.0.1",
@@ -39,7 +39,27 @@
     "@deepseek-ai/dsh-subprocess": "0.1.5-rc.2",
     "@deepseek-ai/dsh-timeout": "0.1.5-rc.2",
     "@deepseek-ai/dsh-workflow": "0.1.5-rc.2",
-    "@deepseek-ai/dsh": "0.1.5-rc.2"
+    "@deepseek-ai/dsh": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-agent-loop": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-api-session-controller": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-attachment-local": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-commands": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-jobs-local": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-llm-deepseek": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-log-export": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-persistence-jsonl": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-query-sqlite": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-settings-file": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-subagent": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-subagent-fork-in-process": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-subagent-spawn-in-process": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-persistence": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-util-workspace-path": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-util-time": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-query": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-jobs": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-attachment": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-settings": "^0.1.5-rc.2"
   },
   "devDependencies": {
     "electron": "43.4.0",

@@ -3,7 +3,7 @@ import { spawn } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { buildDshEnvironment, findAvailablePort, HOST, waitForServer } from './runtime.js'
+import { announcedWebUrl, buildDshEnvironment, findAvailablePort, HOST, waitForServer } from './runtime.js'
 
 const sourceDirectory = dirname(fileURLToPath(import.meta.url))
 const startupController = new AbortController()
@@ -12,6 +12,7 @@ let serverProcess
 let quitting = false
 let fatalErrorShown = false
 let recentLogs = []
+let webUrl
 
 function dshEntryPoint() {
   const path = join(sourceDirectory, '..', 'node_modules', '@deepseek-ai', 'dsh', 'lib', 'bin.js')
@@ -22,7 +23,11 @@ function dshEntryPoint() {
 function appendLog(chunk) {
   const lines = String(chunk).split(/\r?\n/).filter(Boolean)
   recentLogs = [...recentLogs, ...lines].slice(-80)
-  for (const line of lines) console.log(`[dsh] ${line}`)
+  for (const line of lines) {
+    const announced = announcedWebUrl(line)
+    if (announced !== undefined) webUrl = announced
+    console.log(`[dsh] ${line}`)
+  }
 }
 
 function showStartupPage(message = 'Starting the local DeepSeek Harness service…') {
@@ -88,7 +93,7 @@ async function startServer() {
   })
 
   await waitForServer(url, { signal: startupController.signal })
-  await mainWindow.loadURL(url)
+  await mainWindow.loadURL(webUrl ?? url)
 }
 
 function stopServer() {

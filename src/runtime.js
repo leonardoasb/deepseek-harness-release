@@ -24,14 +24,20 @@ export async function waitForServer(url, options = {}) {
   while (Date.now() < deadline) {
     if (signal?.aborted) throw signal.reason ?? new Error('Startup cancelled')
     try {
-      const response = await fetch(url, { signal })
-      if (response.ok) return
+      await fetch(url, { signal })
+      return
     } catch (error) {
       if (signal?.aborted) throw signal.reason ?? error
     }
     await new Promise(resolve => setTimeout(resolve, intervalMs))
   }
   throw new Error(`DeepSeek Harness did not become ready within ${timeoutMs / 1000} seconds`)
+}
+
+/** Extract the dsh web URL (token included, rc >= 0.1.5) from a log line. */
+export function announcedWebUrl(line) {
+  const match = String(line).match(/dsh web: (http:\/\/127\.0\.0\.1:\d+\S*)/)
+  return match?.[1]
 }
 
 export function buildDshEnvironment({ baseEnvironment }) {
