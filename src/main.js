@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, shell } from 'electron'
+import { app, BrowserWindow, Menu, nativeImage, nativeTheme, Tray, dialog, shell } from 'electron'
 import { spawn } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -8,6 +8,7 @@ import { announcedWebUrl, buildDshEnvironment, createWebUrlSignal, findAvailable
 const sourceDirectory = dirname(fileURLToPath(import.meta.url))
 const startupController = new AbortController()
 let mainWindow
+let tray
 let serverProcess
 let quitting = false
 let fatalErrorShown = false
@@ -30,6 +31,14 @@ function appendLog(chunk) {
   }
 }
 
+function backgroundColor() {
+  return nativeTheme.shouldUseDarkColors ? '#1e1f22' : '#ffffff'
+}
+
+function applyTheme() {
+  if (mainWindow && !mainWindow.isDestroyed()) mainWindow.setBackgroundColor(backgroundColor())
+}
+
 function showStartupPage(message = 'Starting the local DeepSeek Harness service…') {
   const page = join(sourceDirectory, 'startup.html')
   return mainWindow.loadFile(page, { query: { message } })
@@ -46,6 +55,26 @@ async function showFatalError(error) {
   dialog.showErrorBox('DeepSeek Harness could not start', details)
 }
 
+function showWindow() {
+  if (!mainWindow || mainWindow.isDestroyed()) {
+    createWindow()
+    return
+  }
+  mainWindow.show()
+  mainWindow.focus()
+}
+
+function createTray() {
+  const icon = nativeImage.createFromPath(join(sourceDirectory, 'brand.png')).resize({ height: 18 })
+  tray = new Tray(icon)
+  tray.setToolTip('DeepSeek Harness')
+  tray.setContextMenu(Menu.buildFromTemplate([
+    { label: 'Open DeepSeek Harness', click: showWindow },
+    { type: 'separator' },
+    { label: 'Quit DeepSeek Harness', click: () => app.quit() }
+  ]))
+}
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
@@ -53,7 +82,7 @@ function createWindow() {
     minWidth: 860,
     minHeight: 600,
     show: false,
-    backgroundColor: '#fff',
+    backgroundColor: backgroundColor(),
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
@@ -62,6 +91,14 @@ function createWindow() {
   })
 
   mainWindow.once('ready-to-show', () => mainWindow.show())
+  // Closing the window keeps the harness running in the tray; Quit (Cmd+Q or
+  // the tray menu) sets `quitting` first, so this interception steps aside.
+  mainWindow.on('close', event => {
+    if (!quitting) {
+      event.preventDefault()
+      mainWindow.hide()
+    }
+  })
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith('http://') || url.startsWith('https://')) void shell.openExternal(url)
     return { action: 'deny' }
@@ -108,6 +145,11 @@ function stopServer() {
 }
 
 app.whenReady().then(async () => {
+  // The window chrome and startup page follow the macOS appearance; the DSH
+  // web UI keeps its own in-app theme setting.
+  nativeTheme.themeSource = 'system'
+  nativeTheme.on('updated', applyTheme)
+  createTray()
   await createWindow()
   try {
     await startServer()
@@ -116,13 +158,13 @@ app.whenReady().then(async () => {
   }
 })
 
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) void createWindow()
-})
+app.on('activate', () => showWindow())
 
 app.on('before-quit', () => {
   quitting = true
   stopServer()
 })
 
-app.on('window-all-closed', () => app.quit())
+// Keep running in the background: closing the window only hides it. Quitting
+// happens through Cmd+Q or the tray menu, which trigger `before-quit`.
+app.on('window-all-closed', () => {})
