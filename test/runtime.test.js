@@ -13,14 +13,14 @@ const mainProcessPath = fileURLToPath(new URL('../src/main.js', import.meta.url)
 
 test('bundles the current DeepSeek Harness release', async () => {
   const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf8'))
-  assert.equal(packageJson.dependencies['@deepseek-ai/dsh'], '0.1.5-rc.2')
-  assert.equal(packageJson.dependencies['@deepseek-ai/dsh-timeout'], '0.1.5-rc.2')
+  assert.equal(packageJson.dependencies['@deepseek-ai/dsh'], '0.1.7-rc.1')
+  assert.equal(packageJson.dependencies['@deepseek-ai/dsh-timeout'], '0.1.7-rc.1')
 })
 
 test('packaged runtime check targets the current DSH dependency graph', async () => {
   const runtimeCheck = await readFile(packagedRuntimeCheckPath, 'utf8')
-  assert.match(runtimeCheck, /'@deepseek-ai\/dsh'/)
-  assert.match(runtimeCheck, /'@deepseek-ai\/dsh-timeout'/)
+  assert.match(runtimeCheck, /repoPackage\.dependencies/)
+  assert.match(runtimeCheck, /startsWith\('@deepseek-ai\/'\)/)
 })
 
 test('findAvailablePort returns a bindable port', async () => {

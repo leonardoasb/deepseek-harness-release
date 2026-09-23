@@ -1,40 +1,27 @@
-// Patches for @deepseek-ai/dsh 0.1.5-rc.2 packaging quirks. Safe to re-run.
+// Patches for @deepseek-ai/dsh 0.1.7-rc.1 packaging quirks. Safe to re-run.
 // 1) Core runtime plugins shipped as devDependencies never reach production
-//    installs, so the profile module-fallback misses them; promote them to
-//    dependencies so the fallback closure links every plugin the base inserts.
+//    installs, so the profile module-fallback misses them; promote every
+//    installed @deepseek-ai/dsh-* devDependency to a dependency so the fallback
+//    closure links every plugin the base inserts. Uninstalled entries are
+//    skipped instead of crashing the postinstall.
 // 2) The web profile template ships patchReload "live", whose watcher crashes
 //    standalone boots ("requires the Cordis HMR service"); every other profile
 //    uses "startup", which applies patches once without watching.
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 const appRoot = join(process.cwd(), 'node_modules', '@deepseek-ai')
-const corePlugins = [
-  'dsh-agent-loop',
-  'dsh-api-session-controller',
-  'dsh-attachment-local',
-  'dsh-commands',
-  'dsh-jobs-local',
-  'dsh-llm-deepseek',
-  'dsh-session-log-export',
-  'dsh-session-persistence-jsonl',
-  'dsh-session-query-sqlite',
-  'dsh-settings-file',
-  'dsh-subagent',
-  'dsh-subagent-fork-in-process',
-  'dsh-subagent-spawn-in-process'
-]
 
 const dshManifestPath = join(appRoot, 'dsh', 'package.json')
 const dshManifest = JSON.parse(readFileSync(dshManifestPath, 'utf8'))
 dshManifest.dependencies ??= {}
 let promoted = 0
-for (const name of corePlugins) {
-  const fullName = '@deepseek-ai/' + name
+for (const fullName of Object.keys(dshManifest.devDependencies ?? {})) {
+  if (!fullName.startsWith('@deepseek-ai/dsh')) continue
   if (dshManifest.dependencies[fullName] !== undefined) continue
-  const spec = dshManifest.devDependencies?.[fullName]
-    ?? JSON.parse(readFileSync(join(appRoot, name, 'package.json'), 'utf8')).version
-  dshManifest.dependencies[fullName] = spec
+  const installedManifest = join(appRoot, fullName.slice('@deepseek-ai/'.length), 'package.json')
+  if (!existsSync(installedManifest)) continue
+  dshManifest.dependencies[fullName] = JSON.parse(readFileSync(installedManifest, 'utf8')).version
   promoted += 1
 }
 writeFileSync(dshManifestPath, JSON.stringify(dshManifest, null, 2) + '\n')
