@@ -73,11 +73,10 @@ function createWindow() {
 async function startServer() {
   const port = await findAvailablePort()
   const url = `http://${HOST}:${port}`
-  const dshHome = join(app.getPath('userData'), 'dsh')
 
   serverProcess = spawn(process.execPath, ['--expose-internals', dshEntryPoint(), 'web', '--host', HOST, '--port', String(port), '--no-open'], {
     cwd: app.getPath('home'),
-    env: buildDshEnvironment({ baseEnvironment: process.env, dshHome }),
+    env: buildDshEnvironment({ baseEnvironment: process.env }),
     stdio: ['ignore', 'pipe', 'pipe']
   })
   serverProcess.stdout.on('data', appendLog)

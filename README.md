@@ -31,7 +31,7 @@ For DSH features, configuration, plugins, and development documentation, refer t
 
 ### Download and install
 
-Download the latest `DeepSeek-Harness-*-mac-arm64.dmg` from [Releases](https://github.com/RichieChoo/deepseek-harness-release/releases), open it, and drag the app into `Applications`.
+Download the latest `DeepSeek-Harness-*-mac-arm64.dmg` from [Releases](https://github.com/leonardoasb/deepseek-harness-release/releases), open it, and drag the app into `Applications`.
 
 The current releases are not signed or notarized with an Apple Developer ID because those capabilities require a paid Apple Developer Program membership. macOS may report that the app is damaged or cannot verify its developer.
 
@@ -46,7 +46,7 @@ open "/Applications/DeepSeek Harness.app"
 
 This removes the download quarantine attribute only from this app. It does not disable Gatekeeper system-wide. Do not use this command for software you do not trust, and do not disable Gatekeeper globally with commands such as `spctl --master-disable`.
 
-You may need to run `xattr` again after installing a newer, unnotarized release. App data is stored under the standard macOS Application Support directory in `DeepSeek Harness/dsh`.
+You may need to run `xattr` again after installing a newer, unnotarized release. App data is stored in the official DSH home directory, `~/.dsh` — the same location used by the upstream CLI (`npx @deepseek-ai/dsh web`), so sessions and settings are shared between both.
 
 ### Requirements
 
@@ -109,7 +109,7 @@ npx @deepseek-ai/dsh web
 
 ### 下载与安装
 
-前往本仓库的 [Releases](https://github.com/RichieChoo/deepseek-harness-release/releases) 下载最新的 `DeepSeek-Harness-*-mac-arm64.dmg`，打开后将应用拖入 `Applications`。
+前往本仓库的 [Releases](https://github.com/leonardoasb/deepseek-harness-release/releases) 下载最新的 `DeepSeek-Harness-*-mac-arm64.dmg`，打开后将应用拖入 `Applications`。
 
 当前 Release 没有 Apple Developer ID 签名与公证，因为这两项能力需要付费加入 Apple Developer Program。macOS 可能因此提示“应用已损坏”或“无法验证开发者”。
 
@@ -124,7 +124,7 @@ open "/Applications/DeepSeek Harness.app"
 
 该命令只移除这个应用的下载隔离标记，不会关闭系统级 Gatekeeper。不要对不可信应用使用，也不要使用 `spctl --master-disable` 等命令全局关闭安全检查。
 
-以后每次安装新的未公证版本，都可能需要重新执行一次 `xattr`。应用数据保存在 macOS 标准的 Application Support 目录下，即 `DeepSeek Harness/dsh`。
+以后每次安装新的未公证版本，都可能需要重新执行一次 `xattr`。应用数据保存在 DSH 官方主目录 `~/.dsh`，与上游 CLI（`npx @deepseek-ai/dsh web`）共用同一份会话与配置。
 
 ### 系统要求
 

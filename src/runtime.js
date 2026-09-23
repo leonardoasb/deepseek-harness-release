@@ -34,10 +34,9 @@ export async function waitForServer(url, options = {}) {
   throw new Error(`DeepSeek Harness did not become ready within ${timeoutMs / 1000} seconds`)
 }
 
-export function buildDshEnvironment({ baseEnvironment, dshHome }) {
+export function buildDshEnvironment({ baseEnvironment }) {
   return {
     ...baseEnvironment,
-    DSH_HOME: dshHome,
     ELECTRON_RUN_AS_NODE: '1',
     NODE_ENV: 'production',
     NO_COLOR: '1'

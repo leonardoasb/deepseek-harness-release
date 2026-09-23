@@ -11,8 +11,8 @@ const mainProcessPath = fileURLToPath(new URL('../src/main.js', import.meta.url)
 
 test('bundles the current DeepSeek Harness release', async () => {
   const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf8'))
-  assert.equal(packageJson.dependencies['@deepseek-ai/dsh'], '0.1.1-rc.1')
-  assert.equal(packageJson.dependencies['@deepseek-ai/dsh-timeout'], '0.1.1-rc.1')
+  assert.equal(packageJson.dependencies['@deepseek-ai/dsh'], '0.1.5-rc.2')
+  assert.equal(packageJson.dependencies['@deepseek-ai/dsh-timeout'], '0.1.5-rc.2')
 })
 
 test('packaged runtime check targets the current DSH dependency graph', async () => {
@@ -34,10 +34,10 @@ test('waitForServer resolves when an HTTP server is ready', async t => {
   await waitForServer(`http://127.0.0.1:${port}`, { timeoutMs: 1_000, intervalMs: 10 })
 })
 
-test('buildDshEnvironment preserves the base environment and isolates app data', () => {
-  const environment = buildDshEnvironment({ baseEnvironment: { PATH: '/bin' }, dshHome: '/tmp/dsh-home' })
+test('buildDshEnvironment preserves the base environment and uses the official DSH home', () => {
+  const environment = buildDshEnvironment({ baseEnvironment: { PATH: '/bin' } })
   assert.equal(environment.PATH, '/bin')
-  assert.equal(environment.DSH_HOME, '/tmp/dsh-home')
+  assert.equal(environment.DSH_HOME, undefined)
   assert.equal(environment.ELECTRON_RUN_AS_NODE, '1')
 })
 
