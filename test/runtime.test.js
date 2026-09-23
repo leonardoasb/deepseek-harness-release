@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import { createServer } from 'node:http'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
-import { announcedWebUrl, buildDshEnvironment, createWebUrlSignal, findAvailablePort, waitForServer } from '../src/runtime.js'
+import { announcedWebUrl, buildDshEnvironment, createWebUrlSignal, findAvailablePort, themePreference, waitForServer } from '../src/runtime.js'
 
 const packageJsonPath = fileURLToPath(new URL('../package.json', import.meta.url))
 const packagedRuntimeCheckPath = fileURLToPath(new URL('../scripts/verify-packaged-app.mjs', import.meta.url))
@@ -94,6 +94,32 @@ test('the window loads the announced URL, never the bare origin', async () => {
   const mainProcess = await readFile(mainProcessPath, 'utf8')
   assert.match(mainProcess, /await mainWindow\.loadURL\(authenticatedUrl\)/)
   assert.doesNotMatch(mainProcess, /loadURL\(webUrl \?\? url\)/)
+})
+
+test('themePreference reads the 0.1.7 profile patch document', () => {
+  const document = [
+    '- id: agent-default-model',
+    '  config:',
+    '    provider: deepseek-official',
+    '- id: ui-theme',
+    '  name: "@deepseek-ai/dsh-client-ui-theme"',
+    '  config:',
+    '    preference: dark'
+  ].join('\n')
+  assert.equal(themePreference(document), 'dark')
+})
+
+test('themePreference still reads the legacy settings.yaml document', () => {
+  assert.equal(themePreference('ui-theme:\n  preference: light\n'), 'light')
+})
+
+test('themePreference reports nothing when the document omits it', () => {
+  assert.equal(themePreference('agent-default-model:\n  provider: zai\n'), undefined)
+})
+
+test('the window theme follows the profile patch document', async () => {
+  const mainProcess = await readFile(mainProcessPath, 'utf8')
+  assert.match(mainProcess, /cordis\.patch\.yml/)
 })
 
 test('every @deepseek-ai peer dependency is installed in the bundled graph', async () => {

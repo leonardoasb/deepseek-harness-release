@@ -50,6 +50,20 @@ export function buildDshEnvironment({ baseEnvironment }) {
 }
 
 /**
+ * Extract the `ui-theme` preference from a DSH settings document.
+ *
+ * 0.1.7 moved the old `settings.yaml` sections into the active profile's patch
+ * document (`profiles/<name>/cordis.patch.yml`) as `- id: ui-theme` entries, so
+ * the file name is no longer `settings.yaml`. `preference` only occurs in that
+ * entry, which keeps one flat match valid for both layouts.
+ * @param {string} contents
+ * @returns {string | undefined}
+ */
+export function themePreference(contents) {
+  return String(contents).match(/\bpreference:\s*(\S+)/)?.[1]
+}
+
+/**
  * One-shot awaitable for the authenticated dsh web URL announced on stdout.
  *
  * The web server answers requests before its announcement reaches the parent
