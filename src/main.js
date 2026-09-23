@@ -65,7 +65,9 @@ function showWindow() {
 }
 
 function createTray() {
-  const icon = nativeImage.createFromPath(join(sourceDirectory, 'brand.png')).resize({ height: 18 })
+  // "Template" in the filename makes macOS render it black/white per menu bar.
+  const icon = nativeImage.createFromPath(join(sourceDirectory, 'trayTemplate.png'))
+  icon.setTemplateImage(true)
   tray = new Tray(icon)
   tray.setToolTip('DeepSeek Harness')
   tray.setContextMenu(Menu.buildFromTemplate([

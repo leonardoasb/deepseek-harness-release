@@ -1,6 +1,6 @@
 {
   "name": "deepseek-harness-desktop",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "packageManager": "yarn@1.22.22",
   "description": "Unofficial macOS desktop wrapper for DeepSeek Harness",
   "license": "MIT",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "build:icon": "node scripts/build-icon.mjs",
+    "build:icon": "node scripts/build-icon.mjs && node scripts/build-tray-icon.mjs",
     "test": "node --test",
     "test:packaged": "node scripts/verify-packaged-app.mjs",
     "pack:mac": "electron-builder --mac dir --arm64",
