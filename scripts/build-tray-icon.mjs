@@ -80,7 +80,7 @@ const canvasPng = await sharp(await canvasBase)
   .png().toBuffer()
 
 const outs = [
-  [join(sourceDirectory, 'trayTemplate.png'), 54],
+  [join(sourceDirectory, 'trayTemplate.png'), 18],
   [join(sourceDirectory, 'trayTemplate@2x.png'), 36]
 ]
 mkdirSync(dirname(outs[0][0]), { recursive: true })

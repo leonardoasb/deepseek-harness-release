@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu, nativeImage, nativeTheme, Tray, dialog, shell } from 'electron'
 import { spawn } from 'node:child_process'
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync, watch } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { announcedWebUrl, buildDshEnvironment, createWebUrlSignal, findAvailablePort, HOST, waitForServer } from './runtime.js'
@@ -37,6 +37,31 @@ function backgroundColor() {
 
 function applyTheme() {
   if (mainWindow && !mainWindow.isDestroyed()) mainWindow.setBackgroundColor(backgroundColor())
+}
+
+/**
+ * Follow the theme chosen inside the DSH web UI (Settings stores it as
+ * ui-theme.preference in $DSH_HOME/settings.yaml), so the title bar and
+ * window chrome match the content. Falls back to the system appearance.
+ */
+function watchUiTheme() {
+  const settingsPath = join(process.env.DSH_HOME ?? join(app.getPath('home'), '.dsh'), 'settings.yaml')
+  const apply = () => {
+    try {
+      const preference = readFileSync(settingsPath, 'utf8').match(/ui-theme:\s*\n\s*preference:\s*(\S+)/)?.[1]
+      nativeTheme.themeSource = preference === 'dark' || preference === 'light' ? preference : 'system'
+    } catch {
+      nativeTheme.themeSource = 'system'
+    }
+  }
+  apply()
+  try {
+    watch(dirname(settingsPath), (event, filename) => {
+      if (filename === 'settings.yaml') apply()
+    })
+  } catch (error) {
+    console.error('[theme] settings watch failed:', error)
+  }
 }
 
 function showStartupPage(message = 'Starting the local DeepSeek Harness service…') {
@@ -147,9 +172,9 @@ function stopServer() {
 }
 
 app.whenReady().then(async () => {
-  // The window chrome and startup page follow the macOS appearance; the DSH
-  // web UI keeps its own in-app theme setting.
-  nativeTheme.themeSource = 'system'
+  // Window chrome follows the theme chosen in the DSH web UI (falls back to
+  // the macOS appearance); the startup page tracks the system via CSS.
+  watchUiTheme()
   nativeTheme.on('updated', applyTheme)
   createTray()
   await createWindow()
