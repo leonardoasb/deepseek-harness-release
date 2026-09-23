@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
-import { buildDshEnvironment, findAvailablePort, waitForServer } from '../src/runtime.js'
+import { announcedWebUrl, buildDshEnvironment, createWebUrlSignal, findAvailablePort, waitForServer } from '../src/runtime.js'
 
 const packageJsonPath = fileURLToPath(new URL('../package.json', import.meta.url))
 const packagedRuntimeCheckPath = fileURLToPath(new URL('../scripts/verify-packaged-app.mjs', import.meta.url))
@@ -45,4 +45,51 @@ test('DSH web process never opens the system browser', () => {
   return readFile(mainProcessPath, 'utf8').then(mainProcess => {
     assert.match(mainProcess, /'web', '--host', HOST, '--port', String\(port\), '--no-open'/)
   })
+})
+
+test('createWebUrlSignal resolves with an announcement that arrives after the wait starts', async () => {
+  const signal = createWebUrlSignal()
+  const pending = signal.wait({ timeoutMs: 1_000 })
+  signal.announce('http://127.0.0.1:8787/?token=abc')
+  assert.equal(await pending, 'http://127.0.0.1:8787/?token=abc')
+})
+
+test('createWebUrlSignal resolves with an announcement that arrived before the wait', async () => {
+  const signal = createWebUrlSignal()
+  signal.announce('http://127.0.0.1:8787/?token=abc')
+  assert.equal(await signal.wait({ timeoutMs: 1_000 }), 'http://127.0.0.1:8787/?token=abc')
+})
+
+test('createWebUrlSignal keeps the first announced URL', async () => {
+  const signal = createWebUrlSignal()
+  signal.announce('http://127.0.0.1:8787/?token=first')
+  signal.announce('http://127.0.0.1:8787/?token=second')
+  assert.equal(await signal.wait({ timeoutMs: 1_000 }), 'http://127.0.0.1:8787/?token=first')
+})
+
+test('createWebUrlSignal fails loudly instead of leaving the window unauthenticated', async () => {
+  const signal = createWebUrlSignal()
+  await assert.rejects(signal.wait({ timeoutMs: 20 }), /did not announce its web URL/)
+})
+
+test('createWebUrlSignal rejects with the abort reason', async () => {
+  const controller = new AbortController()
+  const signal = createWebUrlSignal()
+  const pending = signal.wait({ timeoutMs: 1_000, signal: controller.signal })
+  controller.abort(new Error('Application is quitting'))
+  await assert.rejects(pending, /Application is quitting/)
+})
+
+test('announcedWebUrl extracts the token URL from the dsh web banner', () => {
+  assert.equal(
+    announcedWebUrl('dsh web: http://127.0.0.1:52517/?token=Ec0gpduNtv'),
+    'http://127.0.0.1:52517/?token=Ec0gpduNtv'
+  )
+  assert.equal(announcedWebUrl('dsh web: opening the default browser'), undefined)
+})
+
+test('the window loads the announced URL, never the bare origin', async () => {
+  const mainProcess = await readFile(mainProcessPath, 'utf8')
+  assert.match(mainProcess, /await mainWindow\.loadURL\(authenticatedUrl\)/)
+  assert.doesNotMatch(mainProcess, /loadURL\(webUrl \?\? url\)/)
 })

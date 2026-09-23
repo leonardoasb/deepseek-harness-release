@@ -48,3 +48,43 @@ export function buildDshEnvironment({ baseEnvironment }) {
     NO_COLOR: '1'
   }
 }
+
+/**
+ * One-shot awaitable for the authenticated dsh web URL announced on stdout.
+ *
+ * The web server answers requests before its announcement reaches the parent
+ * process, so readiness alone does not tell the window which URL carries the
+ * launch token. Loading the bare origin instead leaves the renderer on the
+ * `dsh web authentication required` page with no way to recover.
+ * @returns {{ announce: (url: string) => void, wait: (options?: { timeoutMs?: number, signal?: AbortSignal }) => Promise<string> }}
+ *   `announce` records the first announced URL; `wait` resolves with it, even
+ *   when the announcement arrived first.
+ */
+export function createWebUrlSignal() {
+  let announced
+  let notify
+  const arrival = new Promise(resolve => { notify = resolve })
+
+  return {
+    announce(url) {
+      if (announced !== undefined) return
+      announced = url
+      notify(url)
+    },
+    async wait({ timeoutMs = 15_000, signal } = {}) {
+      if (announced !== undefined) return announced
+      let timer
+      const expiry = new Promise((_resolve, reject) => {
+        timer = setTimeout(() => reject(new Error(`DeepSeek Harness did not announce its web URL within ${timeoutMs / 1000} seconds`)), timeoutMs)
+      })
+      const abortion = signal
+        ? new Promise((_resolve, reject) => signal.addEventListener('abort', () => reject(signal.reason ?? new Error('Startup cancelled')), { once: true }))
+        : new Promise(() => {})
+      try {
+        return await Promise.race([arrival, expiry, abortion])
+      } finally {
+        clearTimeout(timer)
+      }
+    }
+  }
+}
