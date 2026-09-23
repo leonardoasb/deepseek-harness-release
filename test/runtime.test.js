@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
-import { readFile } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
+import { readdir, readFile } from 'node:fs/promises'
+import { join } from 'node:path'
 import { createServer } from 'node:http'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
@@ -92,4 +94,25 @@ test('the window loads the announced URL, never the bare origin', async () => {
   const mainProcess = await readFile(mainProcessPath, 'utf8')
   assert.match(mainProcess, /await mainWindow\.loadURL\(authenticatedUrl\)/)
   assert.doesNotMatch(mainProcess, /loadURL\(webUrl \?\? url\)/)
+})
+
+test('every @deepseek-ai peer dependency is installed in the bundled graph', async () => {
+  const modules = fileURLToPath(new URL('../node_modules/@deepseek-ai', import.meta.url))
+  const missing = []
+  for (const entry of await readdir(modules, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+    let manifest
+    try {
+      manifest = JSON.parse(await readFile(join(modules, entry.name, 'package.json'), 'utf8'))
+    } catch {
+      continue
+    }
+    for (const peer of Object.keys(manifest.peerDependencies ?? {})) {
+      if (!peer.startsWith('@deepseek-ai/')) continue
+      if (!existsSync(join(modules, peer.slice('@deepseek-ai/'.length)))) {
+        missing.push(`${peer} (exigido por ${manifest.name})`)
+      }
+    }
+  }
+  assert.deepEqual(missing, [], `peers ausentes — o app quebra no boot:\n${missing.join('\n')}`)
 })
