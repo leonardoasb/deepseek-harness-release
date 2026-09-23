@@ -1,0 +1,25 @@
+name: Test
+
+# Roda em ubuntu de propósito: "yarn test" é "node --test" puro — os testes leem src/ e os
+# manifestos de node_modules, sem electron, sem banco e sem as ferramentas de macOS.
+# O postinstall deste repo é macOS-only ("build:icon" chama iconutil), então o install aqui
+# usa --ignore-scripts. A verificação de empacotamento continua no release.yml, no build do DMG.
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: yarn
+      - run: corepack enable
+      - run: yarn install --frozen-lockfile --ignore-scripts
+      - run: yarn test
