@@ -581,6 +581,11 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-attachment/-/dsh-attachment-0.1.5-rc.3.tgz#4c991cbb4c83ffe6279228b9a0ca2e405c05d009"
   integrity sha512-mQpRILttCP9rxUro5N78jSd7dKLb1tsQN9Qf+talhhxfsOigUCyWqsWVrLJIdXV4Bpa3ZzNuQK29O8D7Z+Njvg==
 
+"@deepseek-ai/dsh-authorization@0.1.5-rc.3":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-authorization/-/dsh-authorization-0.1.5-rc.3.tgz#15e3b68f3302660301df320eb9c06b6a9476004a"
+  integrity sha512-P3HHhAf2KqYcxhlTZWRWvwGVr5ddau/ArmDi2mqGU/mUHlRvsn5rX1wzl6zx06olqjq9otuvxlVtbqBibVtl9g==
+
 "@deepseek-ai/dsh-base@^0.1.5-rc.2":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-base/-/dsh-base-0.1.5-rc.3.tgz#b18077f9afcf69e4d2742202b232ed9003e7443f"
@@ -1129,6 +1134,11 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-home-paths/-/dsh-home-paths-0.1.5-rc.3.tgz#4ab79650b1e48da14bf868418d40c2313b0c8d1a"
   integrity sha512-cdZ9B3UUy1gvLOkLYIxZHH3Zj7gzJdnSTipOOz6mU85xoj9cZYVkhkoXlR0k7Nf9rrpgsTwL8tDNcZg2WGzT3A==
 
+"@deepseek-ai/dsh-hook-protocol@0.1.5-rc.3":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-hook-protocol/-/dsh-hook-protocol-0.1.5-rc.3.tgz#4025d450168418ca493231e5fbbd12690cfeda8d"
+  integrity sha512-Sfnwzsoa30wyCZs79J3dULjQjUIoufgtAYXkvmq5DH+oXAZxxqZLP/MXAHhNxR6HEGzqx3JCuKqQsUnzFQPfaQ==
+
 "@deepseek-ai/dsh-hooks-claude-code@^0.1.5-rc.2":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-hooks-claude-code/-/dsh-hooks-claude-code-0.1.5-rc.3.tgz#26526311ebd242189e0cc9edd9cebf7ec1fb3868"
@@ -1333,7 +1343,7 @@
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-package-manifest/-/dsh-package-manifest-0.1.5-rc.3.tgz#943eed8939b9eafe787b6f0d2a2140f931a2b664"
   integrity sha512-fTRq80FxlIDkRqpyODS1YElnrqJnYhSfPZv3ybdL7NKBikSypnoP3RsGNl5jVGzrs1KKwrs3Awf4zR957gEJ9w==
 
-"@deepseek-ai/dsh-permission-presets@^0.1.5-rc.3":
+"@deepseek-ai/dsh-permission-presets@0.1.5-rc.3", "@deepseek-ai/dsh-permission-presets@^0.1.5-rc.3":
   version "0.1.5-rc.3"
   resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-permission-presets/-/dsh-permission-presets-0.1.5-rc.3.tgz#ef88a4934b13623c8972761cfa509bb1d08abf7b"
   integrity sha512-WTnXePyt6fl5OmLU9X4qk7r9gpybkmyOsM7T12FVBYs48/Rj2onltk6bpNUIRZwJ1698jSDPI8EZOnPCEp2Vog==
@@ -1482,6 +1492,11 @@
     "@deepseek-ai/dsh-tool-bash-persistent" "^0.1.5-rc.3"
     "@deepseek-ai/dsh-tool-pwsh-persistent" "^0.1.5-rc.3"
     "@deepseek-ai/dsh-tools" "^0.1.5-rc.3"
+
+"@deepseek-ai/dsh-sdk-protocol@0.1.5-rc.3":
+  version "0.1.5-rc.3"
+  resolved "https://registry.yarnpkg.com/@deepseek-ai/dsh-sdk-protocol/-/dsh-sdk-protocol-0.1.5-rc.3.tgz#31e4a7b545e0a46bb5082d9af1c276dfa1307ca1"
+  integrity sha512-wc4nJV5R99yYEvtgQ6VGHxlRZnAFTfUzXhOpSpRyIevRtc1sNI3LicYZNpFRObJt/zA9+bfgcT5v4UwktoturA==
 
 "@deepseek-ai/dsh-session-checkpoint-policy@^0.1.5-rc.3":
   version "0.1.5-rc.3"
