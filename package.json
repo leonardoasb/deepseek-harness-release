@@ -1,6 +1,6 @@
 {
   "name": "deepseek-harness-desktop",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "packageManager": "yarn@1.22.22",
   "description": "Unofficial macOS desktop wrapper for DeepSeek Harness",
   "license": "MIT",
