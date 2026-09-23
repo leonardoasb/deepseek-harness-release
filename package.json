@@ -1,6 +1,6 @@
 {
   "name": "deepseek-harness-desktop",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "packageManager": "yarn@1.22.22",
   "description": "Unofficial macOS desktop wrapper for DeepSeek Harness",
   "license": "MIT",
@@ -27,10 +27,6 @@
     "@deepseek-ai/dsh-code-runtime": "0.1.5-rc.2",
     "@deepseek-ai/dsh-compaction": "0.1.5-rc.2",
     "@deepseek-ai/dsh-fs": "0.1.5-rc.2",
-    "@deepseek-ai/dsh-authorization": "0.1.5-rc.3",
-    "@deepseek-ai/dsh-hook-protocol": "0.1.5-rc.3",
-    "@deepseek-ai/dsh-permission-presets": "0.1.5-rc.3",
-    "@deepseek-ai/dsh-sdk-protocol": "0.1.5-rc.3",
     "@deepseek-ai/dsh-invariants": "0.1.5-rc.2",
     "@deepseek-ai/dsh-output-retention": "0.1.5-rc.2",
     "@deepseek-ai/dsh-sandbox": "0.1.5-rc.2",
