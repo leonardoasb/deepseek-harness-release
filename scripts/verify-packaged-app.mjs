@@ -1,50 +1,15 @@
 import { spawn } from 'node:child_process'
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { setTimeout as delay } from 'node:timers/promises'
 
 const appRoot = join(process.cwd(), 'dist', 'mac-arm64', 'DeepSeek Harness.app')
 const resources = join(appRoot, 'Contents', 'Resources', 'app')
 const executable = join(appRoot, 'Contents', 'MacOS', 'DeepSeek Harness')
-const requiredPackages = [
-  '@deepseek-ai/cordis-plugin-group',
-  '@deepseek-ai/dsh-anonymous-user-id',
-  '@deepseek-ai/dsh-atomic-write',
-  '@deepseek-ai/dsh-bash-local',
-  '@deepseek-ai/dsh-code-runtime',
-  '@deepseek-ai/dsh-compaction',
-  '@deepseek-ai/dsh-fs',
-  '@deepseek-ai/dsh-authorization',
-  '@deepseek-ai/dsh-hook-protocol',
-  '@deepseek-ai/dsh-permission-presets',
-  '@deepseek-ai/dsh-sdk-protocol',
-  '@deepseek-ai/dsh-invariants',
-  '@deepseek-ai/dsh-output-retention',
-  '@deepseek-ai/dsh-sandbox',
-  '@deepseek-ai/dsh-scope',
-  '@deepseek-ai/dsh-session-telemetry',
-  '@deepseek-ai/dsh-session-title-llm',
-  '@deepseek-ai/dsh-shell',
-  '@deepseek-ai/dsh-spill',
-  '@deepseek-ai/dsh-subagent-in-process-driver',
-  '@deepseek-ai/dsh-subprocess',
-  '@deepseek-ai/dsh-timeout',
-  '@deepseek-ai/dsh-workflow',
-  '@deepseek-ai/dsh',
-  '@deepseek-ai/dsh-agent-loop',
-  '@deepseek-ai/dsh-api-session-controller',
-  '@deepseek-ai/dsh-attachment-local',
-  '@deepseek-ai/dsh-commands',
-  '@deepseek-ai/dsh-jobs-local',
-  '@deepseek-ai/dsh-llm-deepseek',
-  '@deepseek-ai/dsh-session-log-export',
-  '@deepseek-ai/dsh-session-persistence-jsonl',
-  '@deepseek-ai/dsh-session-query-sqlite',
-  '@deepseek-ai/dsh-settings-file',
-  '@deepseek-ai/dsh-subagent',
-  '@deepseek-ai/dsh-subagent-fork-in-process',
-  '@deepseek-ai/dsh-subagent-spawn-in-process'
-]
+// Mantém a bateria em sincronia com o bundle: exige todo pacote @deepseek-ai
+// declarado em dependencies, no lugar de uma lista fixa que envelhece.
+const repoPackage = JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf8'))
+const requiredPackages = Object.keys(repoPackage.dependencies).filter(name => name.startsWith('@deepseek-ai/'))
 
 for (const packageName of requiredPackages) {
   const manifest = join(resources, 'node_modules', packageName, 'package.json')

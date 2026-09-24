@@ -3,7 +3,7 @@ import { spawn } from 'node:child_process'
 import { existsSync, readFileSync, watch } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { announcedWebUrl, buildDshEnvironment, createWebUrlSignal, findAvailablePort, HOST, waitForServer } from './runtime.js'
+import { announcedWebUrl, buildDshEnvironment, createWebUrlSignal, findAvailablePort, HOST, themePreference, waitForServer } from './runtime.js'
 
 const sourceDirectory = dirname(fileURLToPath(import.meta.url))
 const startupController = new AbortController()
@@ -40,27 +40,48 @@ function applyTheme() {
 }
 
 /**
- * Follow the theme chosen inside the DSH web UI (Settings stores it as
- * ui-theme.preference in $DSH_HOME/settings.yaml), so the title bar and
- * window chrome match the content. Falls back to the system appearance.
+ * Settings documents that may carry the DSH web UI theme, newest layout first.
+ * 0.1.7 moved the old `settings.yaml` sections into the active profile's patch
+ * document, leaving the previous file behind as `settings.yaml.imported`.
+ */
+function themeDocuments() {
+  const home = process.env.DSH_HOME ?? join(app.getPath('home'), '.dsh')
+  const profileDir = process.env.DSH_PROFILE_DIR ?? join(home, 'profiles', process.env.DSH_PROFILE ?? 'web')
+  return [
+    join(profileDir, 'cordis.patch.yml'),
+    join(home, 'settings.yaml'),
+    join(home, 'settings.yaml.imported')
+  ]
+}
+
+/**
+ * Follow the theme chosen inside the DSH web UI, so the title bar and window
+ * chrome match the content. Every candidate document is probed in order and
+ * each containing directory is watched. Falls back to the system appearance.
  */
 function watchUiTheme() {
-  const settingsPath = join(process.env.DSH_HOME ?? join(app.getPath('home'), '.dsh'), 'settings.yaml')
+  const documents = themeDocuments()
   const apply = () => {
-    try {
-      const preference = readFileSync(settingsPath, 'utf8').match(/ui-theme:\s*\n\s*preference:\s*(\S+)/)?.[1]
-      nativeTheme.themeSource = preference === 'dark' || preference === 'light' ? preference : 'system'
-    } catch {
-      nativeTheme.themeSource = 'system'
+    let preference
+    for (const path of documents) {
+      try {
+        preference = themePreference(readFileSync(path, 'utf8'))
+      } catch {
+        continue
+      }
+      if (preference) break
     }
+    nativeTheme.themeSource = preference === 'dark' || preference === 'light' ? preference : 'system'
   }
   apply()
-  try {
-    watch(dirname(settingsPath), (event, filename) => {
-      if (filename === 'settings.yaml') apply()
-    })
-  } catch (error) {
-    console.error('[theme] settings watch failed:', error)
+  for (const directory of new Set(documents.map(dirname))) {
+    try {
+      watch(directory, (_event, filename) => {
+        if (!filename || documents.some(path => path.endsWith(filename))) apply()
+      })
+    } catch (error) {
+      console.error('[theme] settings watch failed:', error)
+    }
   }
 }
 
