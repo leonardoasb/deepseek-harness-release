@@ -1,12 +1,9 @@
-// Patches for @deepseek-ai/dsh 0.1.7-rc.1 packaging quirks. Safe to re-run.
-// 1) Core runtime plugins shipped as devDependencies never reach production
-//    installs, so the profile module-fallback misses them; promote every
-//    installed @deepseek-ai/dsh-* devDependency to a dependency so the fallback
-//    closure links every plugin the base inserts. Uninstalled entries are
-//    skipped instead of crashing the postinstall.
-// 2) The web profile template ships patchReload "live", whose watcher crashes
-//    standalone boots ("requires the Cordis HMR service"); every other profile
-//    uses "startup", which applies patches once without watching.
+// Patches for @deepseek-ai/dsh 0.1.7-rc.2 packaging quirks. Safe to re-run.
+// Core runtime plugins shipped as devDependencies never reach production
+// installs, so the profile module-fallback misses them; promote every
+// installed @deepseek-ai/dsh-* devDependency to a dependency so the fallback
+// closure links every plugin the base inserts. Uninstalled entries are
+// skipped instead of crashing the postinstall.
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -26,16 +23,3 @@ for (const fullName of Object.keys(dshManifest.devDependencies ?? {})) {
 }
 writeFileSync(dshManifestPath, JSON.stringify(dshManifest, null, 2) + '\n')
 console.log(`patch-dsh-runtime: ${promoted} core plugin(s) promoted to dependencies`)
-
-const bootModulePath = join(appRoot, 'dsh-app-boot', 'lib', 'index.js')
-const bootModule = readFileSync(bootModulePath, 'utf8')
-const liveTemplate = 'web: {\n\t\tbundles: ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app"],\n\t\tpatchReload: "live"'
-const startupTemplate = 'web: {\n\t\tbundles: ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app"],\n\t\tpatchReload: "startup"'
-if (bootModule.includes(liveTemplate)) {
-  writeFileSync(bootModulePath, bootModule.replace(liveTemplate, startupTemplate))
-  console.log('patch-dsh-runtime: web profile patchReload live -> startup')
-} else if (bootModule.includes(startupTemplate)) {
-  console.log('patch-dsh-runtime: web profile patchReload already startup')
-} else {
-  console.log('patch-dsh-runtime: web profile template not found; skipping patchReload patch')
-}
